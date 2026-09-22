@@ -1,23 +1,23 @@
 {
-  "name": "Nameverse",
-  "version": "0.1.0",
+  "name": "nameverse",
+  "version": "1.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "node scripts/generate-manifest.mjs && node scripts/generate-search-index.mjs && astro build && node scripts/generate-sitemaps.mjs",
-    "build:test": "node scripts/generate-manifest.mjs --limit=100 && node scripts/generate-search-index.mjs --limit=100 && astro build && node scripts/generate-sitemaps.mjs",
-    "preview": "astro preview"
+    "dev": "next dev",
+    "build": "node --max-old-space-size=4096 ./node_modules/next/dist/bin/next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "astro": "^5.1.0"
-  },
-  "devDependencies": {
-    "@astrojs/sitemap": "^3.2.0",
-    "@astrojs/tailwind": "^6.0.0",
     "@fontsource-variable/fraunces": "^5.3.0",
     "@fontsource-variable/inter": "^5.3.0",
-    "gh-pages": "^6.3.0",
-    "tailwindcss": "^3.4.0"
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
   }
 }

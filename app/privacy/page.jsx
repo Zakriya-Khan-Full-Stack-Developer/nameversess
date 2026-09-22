@@ -1,0 +1,73 @@
+export const metadata = {
+  title: 'Privacy Policy | NameVerse',
+  description:
+    'How NameVerse handles data: anonymous analytics, advertising cookies, local theme preferences and your rights. We never sell personal data.',
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+
+export const revalidate = 2592000; // 30 days
+
+const sections = [
+  {
+    title: '1. What we collect',
+    body: 'NameVerse is an open informational website. We do not require accounts and do not ask for personal information. We may collect anonymous, aggregated usage statistics (pages visited, approximate region, device type) to understand which features and traditions matter to our visitors.',
+  },
+  {
+    title: '2. Advertising',
+    body: 'We display advertising to keep the service free for all families. Third-party advertising partners and networks (including Revolthem and Google AdSense) may use cookies or web beacons to serve advertisements based on prior visits. You can manage or disable cookie preferences in your browser settings at any time.',
+  },
+  {
+    title: '3. Local storage',
+    body: 'We use your browser’s local storage only to remember your light/dark theme preference on this device. This preference data never leaves your browser.',
+  },
+  {
+    title: '4. Third-party services',
+    body: 'Analytics and advertising partners process anonymized usage data under their own privacy policies. We do not sell personal data, and we do not share identifiable information with advertisers.',
+  },
+  {
+    title: '5. Children’s privacy',
+    body: 'NameVerse is a general-audience informational site and does not knowingly collect personal information from children under 13.',
+  },
+  {
+    title: '6. Your rights',
+    body: 'Depending on your region, you may have rights to access, correct or delete personal data, and to object to certain processing. To exercise these rights, contact privacy@nameverse.site.',
+  },
+  {
+    title: '7. Changes to this policy',
+    body: 'We may update this policy as the site evolves. Material changes will be reflected by the "last updated" date below.',
+  },
+];
+
+export default function PrivacyPage() {
+  return (
+    <div className="container-page py-10 sm:py-14">
+      <div className="mx-auto max-w-3xl">
+        <header className="mb-8">
+          <span className="eyebrow">Legal</span>
+          <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-nv-text sm:text-5xl">
+            Privacy Policy
+          </h1>
+          <p className="mt-3 text-sm text-nv-text-secondary">Last updated: August 2026</p>
+        </header>
+
+        <div className="space-y-4">
+          {sections.map((s) => (
+            <section key={s.title} className="card p-6">
+              <h2 className="font-display text-lg font-bold text-nv-text">{s.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-nv-text-secondary">{s.body}</p>
+            </section>
+          ))}
+          <p className="pt-4 text-sm text-nv-text-secondary">
+            Questions? Write to{' '}
+            <a href="mailto:privacy@nameverse.site" className="font-semibold text-nv-accent hover:underline">
+              privacy@nameverse.site
+            </a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

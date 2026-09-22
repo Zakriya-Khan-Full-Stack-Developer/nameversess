@@ -1,0 +1,9 @@
+User-Agent: *
+Allow: /
+Disallow: /search
+Disallow: /advanced-search
+Disallow: /my-names
+Disallow: /popular-by-state
+
+Sitemap: https://nameverse.site/sitemap.xml
+Sitemap: https://nameverse.site/sitemap-index.xml

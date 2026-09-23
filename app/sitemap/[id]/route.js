@@ -2,7 +2,7 @@ import { getManifest, getBlogPosts } from '../../../lib/data/names-data.js';
 import { ORIGIN_SLUGS, CATEGORY_SLUGS } from '../../../lib/data/name-utils.js';
 import { ALL_RELIGIONS, ALL_LETTERS, lettersFor } from '../../../lib/data/letter-browser.js';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 2592000; // 30 days
 
 function escapeXml(str) {
   return String(str || '')
@@ -115,6 +115,7 @@ ${urls
   .map(
     (url) => `  <url>
     <loc>${escapeXml(url)}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
   </url>`
   )
   .join('\n')}
@@ -123,7 +124,7 @@ ${urls
   return new Response(xml, {
     headers: {
       'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+      'Cache-Control': 'public, max-age=2592000, s-maxage=2592000',
     },
   });
 }

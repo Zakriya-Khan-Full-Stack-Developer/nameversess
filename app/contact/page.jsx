@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PageJsonLd from '../../components/PageJsonLd.jsx';
 
 export const metadata = {
   title: 'Contact NameVerse — Feedback, Corrections & Suggestions',
@@ -11,9 +12,24 @@ export const metadata = {
 
 export const revalidate = 2592000; // 30 days
 
+const contactJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact NameVerse',
+  description: 'Contact the NameVerse team for feedback, corrections, and suggestions.',
+  url: 'https://nameverse.site/contact',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: 'hello@nameverse.site',
+    areaServed: 'Worldwide',
+  },
+};
+
 export default function ContactPage() {
   return (
     <div className="container-page py-10 sm:py-14">
+      <PageJsonLd data={contactJsonLd} />
       <div className="mx-auto max-w-3xl">
         <header className="mb-8">
           <span className="eyebrow">Contact</span>

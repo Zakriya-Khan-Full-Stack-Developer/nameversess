@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getManifest, getPopularSlugs } from '../lib/data/names-data.js';
 import NameCard from '../components/NameCard.jsx';
 import HomepageSearch from '../components/HomepageSearch.jsx';
+import PageJsonLd from '../components/PageJsonLd.jsx';
 
 export const revalidate = 2592000; // 30 days
 
@@ -175,10 +176,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <PageJsonLd data={faqSchema} />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-nv-border/80 bg-gradient-to-b from-nv-subtle/70 via-nv-surface to-nv-page py-16 sm:py-24">

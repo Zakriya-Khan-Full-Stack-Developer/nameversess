@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import SearchClient from '../../components/SearchClient.jsx';
+import PageJsonLd from '../../components/PageJsonLd.jsx';
 
 export const metadata = {
   title: 'Search 42,000+ Baby Names by Meaning, Origin & Tradition | NameVerse',
@@ -11,9 +12,23 @@ export const metadata = {
   },
 };
 
+const searchJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Search Baby Names',
+  description: 'Search 42,000+ baby names by meaning, origin, religion, gender, and popularity.',
+  url: 'https://nameverse.site/search',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://nameverse.site/search?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+};
+
 export default function SearchPage() {
   return (
     <div className="container-page py-10 sm:py-14">
+      <PageJsonLd data={searchJsonLd} />
       <div className="mx-auto max-w-5xl">
         <header className="mb-8 text-center">
           <span className="eyebrow">Instant name search</span>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PageJsonLd from '../../components/PageJsonLd.jsx';
 
 export const metadata = {
   title: 'About NameVerse — Our Mission & Editorial Standards',
@@ -11,9 +12,24 @@ export const metadata = {
 
 export const revalidate = 2592000; // 30 days
 
+const aboutJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About NameVerse',
+  description:
+    'NameVerse helps parents find meaningful baby names across Islamic, Hindu, Christian and global traditions.',
+  url: 'https://nameverse.site/about',
+  publisher: {
+    '@type': 'Organization',
+    name: 'NameVerse',
+    url: 'https://nameverse.site',
+  },
+};
+
 export default function AboutPage() {
   return (
     <div className="container-page py-10 sm:py-14">
+      <PageJsonLd data={aboutJsonLd} />
       <div className="mx-auto max-w-3xl">
         <header className="mb-8">
           <span className="eyebrow">About us</span>

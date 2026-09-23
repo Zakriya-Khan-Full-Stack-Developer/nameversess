@@ -1,6 +1,6 @@
 import { getManifest } from '../../lib/data/names-data.js';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 2592000; // 30 days
 
 export async function GET() {
   const siteUrl = 'https://nameverse.site';
@@ -29,6 +29,7 @@ ${sitemaps
   .map(
     (s) => `  <sitemap>
     <loc>${s.loc}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
   </sitemap>`
   )
   .join('\n')}
@@ -37,7 +38,7 @@ ${sitemaps
   return new Response(xml, {
     headers: {
       'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+      'Cache-Control': 'public, max-age=2592000, s-maxage=2592000',
     },
   });
 }

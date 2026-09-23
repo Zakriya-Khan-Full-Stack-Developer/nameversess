@@ -19,6 +19,17 @@ export const metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  keywords: [
+    'baby names',
+    'baby name meanings',
+    'name origin',
+    'Islamic baby names',
+    'Christian baby names',
+    'Hindu baby names',
+    'Italian baby names',
+    'lucky numbers',
+    'baby name finder',
+  ],
   openGraph: {
     title: 'Baby Names, Meanings, Origins & Lucky Numbers | NameVerse',
     description:

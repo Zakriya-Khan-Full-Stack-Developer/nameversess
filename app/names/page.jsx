@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getManifest, getPopularSlugs } from '../../lib/data/names-data.js';
 import { isBoy, isGirl } from '../../lib/data/name-utils.js';
 import NameCard from '../../components/NameCard.jsx';
+import PageJsonLd from '../../components/PageJsonLd.jsx';
 export const revalidate = 2592000; // 30 days
 
 export const metadata = {
@@ -10,6 +11,19 @@ export const metadata = {
     'Browse 42,000+ baby names by religion: Islamic, Christian, Hindu & Italian names with verified meanings, origins and lucky numbers. Free A–Z browsing.',
   alternates: {
     canonical: 'https://nameverse.site/names',
+  },
+};
+
+const namesIndexJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'All Baby Names',
+  description: 'Browse 42,000+ baby names across Islamic, Christian, Hindu, and Italian traditions.',
+  url: 'https://nameverse.site/names',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'NameVerse',
+    url: 'https://nameverse.site',
   },
 };
 
@@ -37,6 +51,7 @@ export default function NamesIndexPage() {
 
   return (
     <div className="container-page py-10 sm:py-14">
+      <PageJsonLd data={namesIndexJsonLd} />
       <div className="mx-auto max-w-6xl">
         <header className="mb-10 text-center">
           <span className="eyebrow">Name directory</span>

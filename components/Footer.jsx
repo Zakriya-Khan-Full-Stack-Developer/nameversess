@@ -85,6 +85,25 @@ export default function Footer() {
               <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>42,310 names indexed with zero soft-404s</span>
             </div>
+
+            <div className="mt-2 rounded-2xl border border-nv-border/80 bg-nv-surface/60 p-3 shadow-sm">
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-nv-text-muted">Contact</p>
+              <div className="mt-2 flex flex-col gap-2 text-sm">
+                <p className="font-semibold text-nv-text">Zakriya Khan</p>
+                <a href="tel:+923497174815" className="text-nv-accent transition hover:text-nv-accent/80">
+                  0349 7174 815
+                </a>
+                <a
+                  href="https://wa.me/923497174815?text=Hi%20Zakriya%20Khan%2C%20I%20found%20your%20site%20and%20want%20to%20connect."
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-emerald-600 transition hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300"
+                >
+                  <span className="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                  WhatsApp Chat
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Traditions */}

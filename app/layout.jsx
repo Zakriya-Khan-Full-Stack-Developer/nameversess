@@ -103,6 +103,9 @@ const orgJsonLd = {
   ],
 };
 
+const madstearScriptUrl = 'https://revolthem.com/c90e1cf06dc7451f1fd3d33c703af951/invoke.js';
+const madstearContainerId = 'container-c90e1cf06dc7451f1fd3d33c703af951';
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
@@ -118,10 +121,26 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
+        <script
+          async="async"
+          data-cfasync="false"
+          src={madstearScriptUrl}
+        />
       </head>
       <body className="flex min-h-screen flex-col bg-nv-page text-nv-text antialiased">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <div className="mx-auto w-full max-w-[1280px] px-3 pt-3 sm:px-4 lg:px-6">
+            <div className="flex justify-center overflow-hidden rounded-lg border border-nv-border/60 bg-nv-surface/40 shadow-sm">
+              <div
+                id={madstearContainerId}
+                className="w-full max-w-[970px] min-h-[90px] overflow-hidden"
+                aria-label="Sponsored advertisement"
+              />
+            </div>
+          </div>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

@@ -23,50 +23,35 @@ export default function NativeAdBanner({
     '';
 
   useEffect(() => {
+    const scriptId = 'adsbygoogle-js';
+    const scriptUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+
     if (!adClient || !adSlot || typeof window === 'undefined') {
       return;
     }
-
-    const scriptId = 'adsbygoogle-js';
-    const pushAd = () => {
-      if (!adRef.current) return;
-      try {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adsbygoogle.push({});
-      } catch (error) {
-        // Ignore ad bootstrap issues; the reserved slot remains visible and safe.
-      }
-    };
-
-    const bootstrap = () => {
-      const existing = document.getElementById(scriptId);
-      if (existing) {
-        existing.addEventListener('load', pushAd, { once: true });
-      }
-      pushAd();
-    };
 
     let script = document.getElementById(scriptId);
     if (!script) {
       script = document.createElement('script');
       script.id = scriptId;
       script.async = true;
-      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+      script.src = scriptUrl;
       script.crossOrigin = 'anonymous';
-      script.onload = bootstrap;
-      script.onerror = () => {
-        // Keep the placeholder visible if the ad script fails to load.
-      };
       document.head.appendChild(script);
-    } else {
-      bootstrap();
     }
 
-    return () => {
-      if (script) {
-        script.onload = null;
+    const pushAd = () => {
+      if (!adRef.current) return;
+      try {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.push({});
+      } catch (error) {
+        // provider may reject SSR or no-fill; keep the container ready.
       }
     };
+
+    const timer = window.setTimeout(pushAd, 350);
+    return () => window.clearTimeout(timer);
   }, [adClient, adSlot]);
 
   const hasConfiguredAd = Boolean(adClient && adSlot);
@@ -105,8 +90,8 @@ export default function NativeAdBanner({
               data-full-width-responsive="true"
             />
           ) : (
-            <div className="flex min-h-[90px] w-full items-center justify-center rounded-xl border border-dashed border-nv-border bg-nv-surface/40 px-4 text-sm text-nv-text-muted">
-              Ad space reserved for partner content
+            <div className="flex min-h-[90px] w-full items-center justify-center rounded-xl border border-dashed border-nv-border bg-nv-surface/40 px-4 text-center text-sm text-nv-text-muted">
+              Sponsored partner slot — configure your ad provider to display native ads here
             </div>
           )}
         </div>

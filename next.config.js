@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: false,
   experimental: {
-    outputFileTracingIncludes: {
-      '/**': ['./public/names/**/*', './src/lib/data/names-manifest.json', './public/data/blog-posts.json'],
+    outputFileTracingExcludes: {
+      '/**': ['./public/names/**/*'],
     },
   },
   async redirects() {

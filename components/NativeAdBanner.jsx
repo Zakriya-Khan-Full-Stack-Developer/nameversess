@@ -13,7 +13,9 @@ export default function NativeAdBanner({
   const adClient =
     process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT ||
     process.env.NEXT_PUBLIC_ADSENSE_CLIENT ||
+    process.env.NEXT_PUBLIC_NATIVE_AD_CLIENT ||
     '';
+
   const adSlot =
     process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_SLOT ||
     process.env.NEXT_PUBLIC_ADSENSE_SLOT ||
@@ -26,32 +28,45 @@ export default function NativeAdBanner({
     }
 
     const scriptId = 'adsbygoogle-js';
-    let script = document.getElementById(scriptId);
+    const pushAd = () => {
+      if (!adRef.current) return;
+      try {
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.push({});
+      } catch (error) {
+        // Ignore ad bootstrap issues; the reserved slot remains visible and safe.
+      }
+    };
 
+    const bootstrap = () => {
+      const existing = document.getElementById(scriptId);
+      if (existing) {
+        existing.addEventListener('load', pushAd, { once: true });
+      }
+      pushAd();
+    };
+
+    let script = document.getElementById(scriptId);
     if (!script) {
       script = document.createElement('script');
       script.id = scriptId;
       script.async = true;
       script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
       script.crossOrigin = 'anonymous';
+      script.onload = bootstrap;
+      script.onerror = () => {
+        // Keep the placeholder visible if the ad script fails to load.
+      };
       document.head.appendChild(script);
+    } else {
+      bootstrap();
     }
 
-    const pushAd = () => {
-      if (!adRef.current) {
-        return;
-      }
-
-      try {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adsbygoogle.push({});
-      } catch (error) {
-        // Ignore ad bootstrap issues; the slot remains visible as a reserved section.
+    return () => {
+      if (script) {
+        script.onload = null;
       }
     };
-
-    const timer = window.setTimeout(pushAd, 250);
-    return () => window.clearTimeout(timer);
   }, [adClient, adSlot]);
 
   const hasConfiguredAd = Boolean(adClient && adSlot);
